@@ -1,0 +1,23 @@
+TITLE: 211 Service Calls
+
+Service calls from 211 San Diego. 
+
+All of the data in this dataset are entered manually, so there is a lot of variation. See the [bundle documentation](d02J003.html) for caveats about the code columns, and be sure to thoroughly examine the contents of columns before using them. 
+
+
+DIR: 211
+DATABASE: sqlite:211service.db 
+PUBLICATION: s3://warehouse.sandiegodata.org/211#compress
+UID: fc22cee6-acfa-4236-a6cb-e0d887eba178
+ACCESS: public
+
+PARTITIONS:
+
+211sandiego.org-calls-p1ye2014-orig-calls-0.0.3
+
+
+DOC: 
+
+# Extracts
+
+EXTRACT: d02J003_calls AS csv TO 211_service_calls.csv
