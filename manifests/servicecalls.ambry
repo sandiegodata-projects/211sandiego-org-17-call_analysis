@@ -4,6 +4,20 @@ Service calls from 211 San Diego.
 
 All of the data in this dataset are entered manually, so there is a lot of variation. See the [bundle documentation](d02J003.html) for caveats about the code columns, and be sure to thoroughly examine the contents of columns before using them. 
 
+This set includes two versions of the call records. The `d02J003_calls` table ( `211_orig_service_calls.csv` ) is the original data which has multiple records for calls that have multiple values for come columns. 
+
+The `d02Q001_calls` ( `211_deduped_service_calls.csv` file ) has the duplicates moved to the multi-value tables, including:
+
+* d02Q001_agencies
+* d02Q001_income_source
+* d02Q001_ins_type
+* d02Q001_need_tax
+* d02Q001_unmet_need
+
+Each of the tables has a `calls_id` column that links to the `id` column in either of the call record tables, and one or more values. There may be multiple rows in the multi-values table for each `calls_id`.
+These tables' schemas are documented in the [211sandiego.org-calls-p1ye2014-dedupe-0.0.1](d02Q001.html) documentation. 
+
+
 
 DIR: 211
 DATABASE: sqlite:211service.db 
@@ -13,11 +27,17 @@ ACCESS: public
 
 PARTITIONS:
 
-211sandiego.org-calls-p1ye2014-orig-calls-0.0.3
-
+211sandiego.org-calls-p1ye2014-orig-calls
+211sandiego.org-calls-p1ye2014-dedupe-calls
 
 DOC: 
 
 # Extracts
 
-EXTRACT: d02J003_calls AS csv TO 211_service_calls.csv
+EXTRACT: d02J003_calls AS csv TO 211_orig_service_calls.csv
+EXTRACT: d02Q001_calls AS csv TO 211_deduped_service_calls.csv
+EXTRACT: d02Q001_agencies AS csv TO 211_agencies.csv
+EXTRACT: d02Q001_income_source AS csv TO 211_income_source.csv
+EXTRACT: d02Q001_ins_type AS csv TO 211_ins_type.csv
+EXTRACT: d02Q001_need_tax AS csv TO 211_need_tax.csv
+EXTRACT: d02Q001_unmet_need AS csv TO 211_unmet_need.csv
